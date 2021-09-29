@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin-when-crossorigin">
+    <meta name="description" content="正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 列目录时， dir *.t">
+    <meta property="og:description" content="正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 列目录时， dir *.t">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>正则表达式中各种字符的含义 - 一个农夫 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.svg" type="image/svg+xml">
+    
+    <link rel="stylesheet" href="./博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./博客园_files/bundle-simpleblue.min.css">
+    <link type="text/css" rel="stylesheet" href="./博客园_files/cnblogs.css">
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./博客园_files/bundle-simpleblue-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/afarmer/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/afarmer/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/afarmer/wlwmanifest.xml">
+    <script async="" src="./博客园_files/analytics.js.下载"></script><script src="./博客园_files/hm.js.下载"></script><script>
+        var currentBlogId = 62291;
+        var currentBlogApp = 'afarmer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+        var hasCustomScript = true;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function(){ return ''; } });
+            }
+        } catch(error) { }
+    </script>
+        <script>
+            var currentPostDateAdded = '2011-08-29 09:10';
+        </script>
+    <script src="./博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./博客园_files/blog-common.min.js.下载"></script><style type="text/css">.medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}</style>
+    
+    
+    
+    <script type="text/javascript">
+        window.codeHighlightEngine = 1
+        window.enableCodeLineNumber = false
+    </script>
+</head>
+<body class="skin-simpleblue has-navbar has-bannerbar">
+    <a name="top"></a>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="./博客园_files/logo.svg" alt="博客园Logo"></a></li>
+                <li><a href="https://www.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-sitehome&#39;)">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-news&#39;)">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-q&#39;)">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-brands&#39;)">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-ing&#39;)">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;skin-navbar-edu&#39;)">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3">
+                        <button type="submit" id="zzk_search_button">
+                            <img src="./博客园_files/search.svg" alt="搜索">
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔" style="display: none;">
+                        <img id="new_post_icon" class="navbar-icon" src="./博客园_files/newpost.svg" alt="写随笔">
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客" style="display: none;">
+                        <img id="myblog_icon" class="navbar-icon" src="./博客园_files/myblog.svg" alt="我的博客">
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息" style="display: none;">
+                        <img id="msg_icon" class="navbar-icon" src="./博客园_files/message.svg" alt="短消息">
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown" style="display: none;">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="./博客园_files/avatar-default.svg" alt="用户头像">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="./博客园_files/lite-mode-check.svg" class="hide"><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/" style="display: inline;">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()" style="display: inline;">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/afarmer/">一个农夫</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/afarmer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%B8%80%E4%B8%AA%E5%86%9C%E5%A4%AB">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/afarmer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 107&nbsp;</span>
+<span id="stats_article_count">文章 - 0&nbsp;</span>
+<span id="stats_comment_count">评论 - 116&nbsp;</span>
+<span id="stats_total_view_count">阅读 - 
+<span title="总阅读数: 1143812">
+114万</span></span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">
+    <span>正则表达式中各种字符的含义</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>  <p>列目录时， dir *.txt或ls *.txt中的*.txt就不是一个正则表达式,因为这里*与正则式的*的含义是不同的。</p>  <p>正则表达式是由普通字符（例如字符 a 到 z）以及特殊字符（称为元字符）组成的文字模式。正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。    <br><a name="31"></a>    <br>3.1 普通字符</p>  <p>由所有那些未显式指定为元字符的打印和非打印字符组成。这包括所有的大写和小写字母字符，所有数字，所有标点符号以及一些符号。    <br><a name="32"></a>    <br>3.2 非打印字符<wbr></p>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th align="left">字符</th>        <th align="left">含义</th>     </tr>      <tr bgcolor="#fafafa">       <td width="40">\cx</td>        <td>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\f</td>        <td>匹配一个换页符。等价于 \x0c 和 \cL。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\n</td>        <td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\r</td>        <td>匹配一个回车符。等价于 \x0d 和 \cM。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\s</td>        <td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\S</td>        <td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\t</td>        <td>匹配一个制表符。等价于 \x09 和 \cI。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\v</td>        <td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>     </tr>   </tbody></table></div>  <p>3.3 特殊字符</p>  <p>所谓特殊字符，就是一些有特殊含义的字符，如上面说的”*.txt”中的*，简单的说就是表示任何字符串的意思。如果要查找文件名中有＊的文件，则需要对＊进行转义，即在其前加一个\。ls \*.txt。正则表达式有以下特殊字符。 <wbr></p>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th width="60" align="left">特别字符</th>        <th align="left">说明</th>     </tr>      <tr bgcolor="#fafafa">       <td>$</td>        <td>匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 \$。</td>     </tr>      <tr bgcolor="#fafafa">       <td>( )</td>        <td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)。</td>     </tr>      <tr bgcolor="#fafafa">       <td>*</td>        <td>匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 \*。</td>     </tr>      <tr bgcolor="#fafafa">       <td>+</td>        <td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 \+。</td>     </tr>      <tr bgcolor="#fafafa">       <td>.</td>        <td>匹配除换行符 \n之外的任何单字符。要匹配 .，请使用 \。</td>     </tr>      <tr bgcolor="#fafafa">       <td>[</td>        <td>标记一个中括号表达式的开始。要匹配 [，请使用 \[。</td>     </tr>      <tr bgcolor="#fafafa">       <td>?</td>        <td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\</td>        <td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\\’ 匹配 “\”，而 ‘\(’ 则匹配 “(”。</td>     </tr>      <tr bgcolor="#fafafa">       <td>^</td>        <td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合。要匹配 ^ 字符本身，请使用 \^。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{</td>        <td>标记限定符表达式的开始。要匹配 {，请使用 \{。</td>     </tr>      <tr bgcolor="#fafafa">       <td>|</td>        <td>指明两项之间的一个选择。要匹配 |，请使用 \|。</td>     </tr>   </tbody></table></div>  <p>构造正则表达式的方法和创建数学表达式的方法一样。也就是用多种元字符与操作符将小的表达式结合在一起来创建更大的表达式。正则表达式的组件可以是单个的字符、字符集合、字符范围、字符间的选择或者所有这些组件的任意组合。    <br>    <br>3.4 限定符</p>  <p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有*或+或?或{n}或{n,}或{n,m}共6种。</p>  <p>*、+和?限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。</p>  <p>正则表达式的限定符有： <wbr></p>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th width="40" align="left">字符</th>        <th align="left">描述</th>     </tr>      <tr bgcolor="#fafafa">       <td>*</td>        <td>匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>+</td>        <td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>?</td>        <td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 {0,1}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n}</td>        <td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n,}</td>        <td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n,m}</td>        <td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>     </tr>   </tbody></table></div>  <p>&nbsp;<strong>3.5 定位符</strong></p>  <p>用来描述字符串或单词的边界，^和$分别指字符串的开始与结束，\b描述单词的前或后边界，\B表示非单词边界。<span style="color: rgba(255, 0, 0, 1)">不能对定位符使用限定符。</span>     <br><a name="36"></a>    <br>3.6 选择</p>  <p>用圆括号将所有选择项括起来，相邻的选择项之间用|分隔。但用圆括号会有一个副作用，是相关的匹配会被缓存，此时可用?:放在第一个选项前来消除这种副作用。</p>  <p>其中?:是非捕获元之一，还有两个非捕获元是?=和?!，这两个还有更多的含义，前者为正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串，后者为负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。    <br><a name="37"></a>    <br>3.7 后向引用</p>  <p>对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左至右所遇到的内容存储。存储子匹配的缓冲区编号从 1 开始，连续编号直至最大 99 个子表达式。每个缓冲区都可以使用 ‘\n’ 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。</p>  <p>可以使用非捕获元字符 ‘?:’, ‘?=’, or ‘?!’ 来忽略对相关匹配的保存。</p>  <p><strong><a name="4"></a>4. 各种操作符的运算优先级</strong></p>  <p>相同优先级的从左到右进行运算，不同优先级的运算先高后低。各种操作符的优先级从高到低如下： <wbr></p>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th bgcolor="#f0f0f0" width="200" align="left">操作符</th>        <th align="left">描述</th>     </tr>      <tr bgcolor="#fafafa">       <td>\</td>        <td>转义符</td>     </tr>      <tr bgcolor="#fafafa">       <td>(), (?:), (?=), []</td>        <td>圆括号和方括号</td>     </tr>      <tr bgcolor="#fafafa">       <td>*, +, ?, {n}, {n,}, {n,m}</td>        <td>限定符</td>     </tr>      <tr bgcolor="#fafafa">       <td>^, $, \anymetacharacter</td>        <td>位置和顺序</td>     </tr>      <tr bgcolor="#fafafa">       <td>|</td>        <td>“或”操作</td>     </tr>   </tbody></table></div>  <p><strong><a name="5"></a>5. 全部符号解释</strong>&nbsp;<wbr></p>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th bgcolor="#f0f0f0" width="80" align="left">字符</th>        <th align="left">描述</th>     </tr>      <tr bgcolor="#fafafa">       <td>\</td>        <td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个向后引用、或一个八进制转义符。例如，’n’ 匹配字符 “n”。’\n’ 匹配一个换行符。序列 ‘\\’ 匹配 “\” 而 “\(” 则匹配 “(”。</td>     </tr>      <tr bgcolor="#fafafa">       <td>^</td>        <td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>     </tr>      <tr bgcolor="#fafafa">       <td>$</td>        <td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>     </tr>      <tr bgcolor="#fafafa">       <td>*</td>        <td>匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>+</td>        <td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>?</td>        <td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 {0,1}。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n}</td>        <td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n,}</td>        <td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>{n,m}</td>        <td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>     </tr>      <tr bgcolor="#fafafa">       <td>?</td>        <td>当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>.</td>        <td>匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用象 ‘[.\n]’ 的模式。</td>     </tr>      <tr bgcolor="#fafafa">       <td>(pattern)</td>        <td>匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 ‘\(’ 或 ‘\)’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>(?:pattern)</td>        <td>匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (|) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y|ies) 就是一个比 ‘industry|industries’ 更简略的表达式。</td>     </tr>      <tr bgcolor="#fafafa">       <td>(?=pattern)</td>        <td>正向预查，在任何匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，’Windows (?=95|98|NT|2000)’ 能匹配 “Windows 2000″ 中的 “Windows” ，但不能匹配 “Windows 3.1″ 中的 “Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>     </tr>      <tr bgcolor="#fafafa">       <td>(?!pattern)</td>        <td>负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如’Windows (?!95|98|NT|2000)’ 能匹配 “Windows 3.1″ 中的 “Windows”，但不能匹配 “Windows 2000″ 中的 “Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>     </tr>      <tr bgcolor="#fafafa">       <td>x|y</td>        <td>匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”。’(z|f)ood’ 则匹配 “zood” 或 “food”。</td>     </tr>      <tr bgcolor="#fafafa">       <td>[xyz]</td>        <td>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>[^xyz]</td>        <td>负值字符集合。匹配未包含的任意字符。例如， ‘[^abc]’ 可以匹配 “plain” 中的’p'。</td>     </tr>      <tr bgcolor="#fafafa">       <td>[a-z]</td>        <td>字符范围。匹配指定范围内的任意字符。例如，’[a-z]’ 可以匹配 ‘a’ 到 ‘z’ 范围内的任意小写字母字符。</td>     </tr>      <tr bgcolor="#fafafa">       <td>[^a-z]</td>        <td>负值字符范围。匹配任何不在指定范围内的任意字符。例如，’[^a-z]’ 可以匹配任何不在 ‘a’ 到 ‘z’ 范围内的任意字符。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\b</td>        <td>匹配一个单词边界，也就是指单词和空格间的位置。例如， ‘er\b’ 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的 ‘er’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\B</td>        <td>匹配非单词边界。’er\B’ 能匹配 “verb” 中的 ‘er’，但不能匹配 “never” 中的 ‘er’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\cx</td>        <td>匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\d</td>        <td>匹配一个数字字符。等价于 [0-9]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\D</td>        <td>匹配一个非数字字符。等价于 [^0-9]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\f</td>        <td>匹配一个换页符。等价于 \x0c 和 \cL。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\n</td>        <td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\r</td>        <td>匹配一个回车符。等价于 \x0d 和 \cM。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\s</td>        <td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\S</td>        <td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\t</td>        <td>匹配一个制表符。等价于 \x09 和 \cI。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\v</td>        <td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\w</td>        <td>匹配包括下划线的任何单词字符。等价于’[A-Za-z0-9_]’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\W</td>        <td>匹配任何非单词字符。等价于 ‘[^A-Za-z0-9_]’。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\xn</td>        <td>匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，’\x41′ 匹配 “A”。’\x041′ 则等价于 ‘\x04′ &amp; “1″。正则表达式中可以使用 ASCII 编码。.</td>     </tr>      <tr bgcolor="#fafafa">       <td>\num</td>        <td>匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，’(.)\1′ 匹配两个连续的相同字符。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\n</td>        <td>标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\nm</td>        <td>标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\nml</td>        <td>如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。</td>     </tr>      <tr bgcolor="#fafafa">       <td>\un</td>        <td>匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。</td>     </tr>   </tbody></table></div>  <br><strong><a name="6"></a>6. 部分例子</strong> <wbr>  <div class="table-wrapper"><table border="1" cellspacing="1" cellpadding="3" bgcolor="#eaeaea" align="center"><tbody>     <tr bgcolor="#f0f0f0">       <th bgcolor="#f0f0f0" width="250" align="left">正则表达式</th>        <th align="left">说明</th>     </tr>      <tr bgcolor="#fafafa">       <td>/\b([a-z]+) \1\b/gi</td>        <td>一个单词连续出现的位置</td>     </tr>      <tr bgcolor="#fafafa">       <td>/(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/</td>        <td>将一个URL解析为协议、域、端口及相对路径</td>     </tr>      <tr bgcolor="#fafafa">       <td>/^(?:Chapter|Section) [1-9][0-9]{0,1}$/</td>        <td>定位章节的位置</td>     </tr>      <tr bgcolor="#fafafa">       <td>/[-a-z]/</td>        <td>A至z共26个字母再加一个-号。</td>     </tr>      <tr bgcolor="#fafafa">       <td>/ter\b/</td>        <td>可匹配chapter，而不能terminal</td>     </tr>      <tr bgcolor="#fafafa">       <td>/\Bapt/</td>        <td>可匹配chapter，而不能aptitude</td>     </tr>      <tr bgcolor="#fafafa">       <td>/Windows(?=95 |98 |NT )/</td>        <td>可匹配Windows95或Windows98或WindowsNT,当找到一个匹配后，从Windows后面开始进行下一次</td>     </tr>   </tbody></table></div>  <p><strong><a name="7"></a>7. 正则表达式匹配规则</strong>     <br><a name="71"></a>    <br>7.1 基本模式匹配</p>  <p>一切从最基本的开始。模式，是正规表达式最基本的元素，它们是一组描述字符串特征的字符。模式可以很简单，由普通的字符串组成，也可以非常复杂，往往用特殊的字符表示一个范围内的字符、重复出现，或表示上下文。例如：</p>  <p>^once</p>  <p>这个模式包含一个特殊的字符^，表示该模式只匹配那些以once开头的字符串。例如该模式与字符串”once upon a time”匹配，与”There once was a man from NewYork”不匹配。正如如^符号表示开头一样，$符号用来匹配那些以给定模式结尾的字符串。</p>  <p>bucket$</p>  <p>这个模式与”Who kept all of this cash in a bucket”匹配，与”buckets”不匹配。字符^和$同时使用时，表示精确匹配（字符串与模式一样）。例如：</p>  <p>^bucket$</p>  <p>只匹配字符串”bucket”。如果一个模式不包括^和$，那么它与任何包含该模式的字符串匹配。例如：模式</p>  <p>once</p>  <p>与字符串</p>  <p>There once was a man from NewYork    <br>Who kept all of his cash in a bucket.</p>  <p>是匹配的。</p>  <p>在该模式中的字母(o-n-c-e)是字面的字符，也就是说，他们表示该字母本身，数字也是一样的。其他一些稍微复杂的字符，如标点符号和白字符（空格、制表符等），要用到转义序列。所有的转义序列都用反斜杠(\)打头。制表符的转义序列是：\t。所以如果我们要检测一个字符串是否以制表符开头，可以用这个模式：</p>  <p>^\t</p>  <p>类似的，用\n表示“新行”，\r表示回车。其他的特殊符号，可以用在前面加上反斜杠，如反斜杠本身用\\表示，句号.用\.表示，以此类推。    <br><a name="72"></a>    <br>7.2 字符簇</p>  <p>在INTERNET的程序中，正规表达式通常用来验证用户的输入。当用户提交一个FORM以后，要判断输入的电话号码、地址、EMAIL地址、信用卡号码等是否有效，用普通的基于字面的字符是不够的。</p>  <p>所以要用一种更自由的描述我们要的模式的办法，它就是字符簇。要建立一个表示所有元音字符的字符簇，就把所有的元音字符放在一个方括号里：</p>  <p>[AaEeIiOoUu]</p>  <p>这个模式与任何元音字符匹配，但只能表示一个字符。用连字号可以表示一个字符的范围，如：</p>  <p>[a-z] //匹配所有的小写字母    <br>[A-Z] //匹配所有的大写字母     <br>[a-zA-Z] //匹配所有的字母     <br>[0-9] //匹配所有的数字     <br>[0-9\.\-] //匹配所有的数字，句号和减号     <br>[ \f\r\t\n] //匹配所有的白字符</p>  <p>同样的，这些也只表示一个字符，这是一个非常重要的。如果要匹配一个由一个小写字母和一位数字组成的字符串，比如”z2″、”t6″或”g7″，但不是”ab2″、”r2d3″ 或”b52″的话，用这个模式：</p>  <p>^[a-z][0-9]$</p>  <p>尽管[a-z]代表26个字母的范围，但在这里它只能与第一个字符是小写字母的字符串匹配。</p>  <p>前面曾经提到^表示字符串的开头，但它还有另外一个含义。当在一组方括号里使用^是，它表示“非”或“排除”的意思，常常用来剔除某个字符。还用前面的例子，我们要求第一个字符不能是数字：</p>  <p>^[^0-9][0-9]$</p>  <p>这个模式与”&amp;5″、”g7″及”-2″是匹配的，但与”12″、”66″是不匹配的。下面是几个排除特定字符的例子：</p>  <p>[^a-z] //除了小写字母以外的所有字符    <br>[^\\\/\^] //除了(\)(/)(^)之外的所有字符     <br>[^\”\’] //除了双引号(”)和单引号(’)之外的所有字符</p>  <p>特殊字符”.” (点，句号)在正规表达式中用来表示除了“新行”之外的所有字符。所以模式”^.5$”与任何两个字符的、以数字5结尾和以其他非“新行”字符开头的字符串匹配。模式”.”可以匹配任何字符串，除了空串和只包括一个“新行”的字符串。</p>  <p>PHP的正规表达式有一些内置的通用字符簇，列表如下：</p>  <p>字符簇含义</p>  <p>[[:alpha:]] 任何字母    <br>[[:digit:]] 任何数字     <br>[[:alnum:]] 任何字母和数字     <br>[[:space:]] 任何白字符     <br>[[:upper:]] 任何大写字母     <br>[[:lower:]] 任何小写字母     <br>[[:punct:]] 任何标点符号     <br>[[:xdigit:]] 任何16进制的数字，相当于[0-9a-fA-F]     <br><a name="73"></a>    <br>7.3 确定重复出现</p>  <p>到现在为止，你已经知道如何去匹配一个字母或数字，但更多的情况下，可能要匹配一个单词或一组数字。一个单词有若干个字母组成，一组数字有若干个单数组成。跟在字符或字符簇后面的花括号({})用来确定前面的内容的重复出现的次数。</p>  <p>字符簇 含义    <br>^[a-zA-Z_]$ 所有的字母和下划线     <br>^[[:alpha:]]{3}$ 所有的3个字母的单词     <br>^a$ 字母a     <br>^a{4}$ aaaa     <br>^a{2,4}$ aa,aaa或aaaa     <br>^a{1,3}$ a,aa或aaa     <br>^a{2,}$ 包含多于两个a的字符串     <br>^a{2,} 如：aardvark和aaab，但apple不行     <br>a{2,} 如：baad和aaa，但Nantucket不行     <br>\t{2} 两个制表符     <br>.{2} 所有的两个字符</p>  <p>这些例子描述了花括号的三种不同的用法。一个数字，{x}的意思是“前面的字符或字符簇只出现x次”；一个数字加逗号，{x,}的意思是“前面的内容出现x或更多的次数”；两个用逗号分隔的数字，{x,y}表示“前面的内容至少出现x次，但不超过y次”。我们可以把模式扩展到更多的单词或数字：</p>  <p>^[a-zA-Z0-9_]{1,}$ //所有包含一个以上的字母、数字或下划线的字符串    <br>^[0-9]{1,}$ //所有的正数     <br>^\-{0,1}[0-9]{1,}$ //所有的整数     <br>^\-{0,1}[0-9]{0,}\.{0,1}[0-9]{0,}$ //所有的小数</p>  <p>最后一个例子不太好理解，是吗？这么看吧：与所有以一个可选的负号(\-{0,1})开头(^)、跟着0个或更多的数字([0-9]{0,})、和一个可选的小数点(\.{0,1})再跟上0个或多个数字([0-9]{0,})，并且没有其他任何东西($)。下面你将知道能够使用的更为简单的方法。</p>  <p>特殊字符”?”与{0,1}是相等的，它们都代表着：“0个或1个前面的内容”或“前面的内容是可选的”。所以刚才的例子可以简化为：</p>  <p>^\-?[0-9]{0,}\.?[0-9]{0,}$</p>  <p>特殊字符”*”与{0,}是相等的，它们都代表着“0个或多个前面的内容”。最后，字符”+”与 {1,}是相等的，表示“1个或多个前面的内容”，所以上面的4个例子可以写成：</p>  <p>^[a-zA-Z0-9_]+$ //所有包含一个以上的字母、数字或下划线的字符串    <br>^[0-9]+$ //所有的正数     <br>^\-?[0-9]+$ //所有的整数     <br>^\-?[0-9]*\.?[0-9]*$ //所有的小数</p>  <p>当然这并不能从技术上降低正规表达式的复杂性，但可以使它们更容易阅读。</p>  <p>转自：<a href="http://blog.sina.com.cn/s/blog_461c24d50100dtnz.html">http://blog.sina.com.cn/s/blog_461c24d50100dtnz.html</a></p>  <p>&nbsp;</p>  <p>正则表达式非常有用，查找、匹配、处理字符串、替换和转换字符串，输入输出等。而且各种语言都支持，例如.NET正则库，JDK正则包, Perl, JavaScript等各种脚本语言都支持正则表达式。下面整理一些常用的正则表达式。</p>  <div class="table-wrapper"><table border="1" cellspacing="0" cellpadding="2" width="710"><tbody>     <tr>       <td>         <p><strong><font color="#008000">字符</font></strong></p>       </td>        <td>         <p><strong><font color="#008000">描述</font></strong></p>       </td>     </tr>      <tr>       <td><em>\</em></td>        <td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\\' 匹配 "\" 而 "\(" 则匹配 "("。</td>     </tr>      <tr>       <td><em>^</em></td>        <td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。</td>     </tr>      <tr>       <td><em>$</em></td>        <td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。</td>     </tr>      <tr>       <td><em>*</em></td>        <td>匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。</td>     </tr>      <tr>       <td><em>+</em></td>        <td>匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。</td>     </tr>      <tr>       <td><em>?</em></td>        <td>匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。</td>     </tr>      <tr>       <td>{<em>n</em>}</td>        <td><em>n</em> 是一个非负整数。匹配确定的 <em>n</em> 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。</td>     </tr>      <tr>       <td>{<em>n,</em>}</td>        <td><em>n</em> 是一个非负整数。至少匹配<em>n</em> 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。</td>     </tr>      <tr>       <td>{<em>n</em>,<em>m</em>}</td>        <td><em>m</em> 和 <em>n</em> 均为非负整数，其中<em>n</em> &lt;= <em>m</em>。最少匹配 <em>n</em> 次且最多匹配 <em>m</em> 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。</td>     </tr>      <tr>       <td><em>?</em></td>        <td>当该字符紧跟在任何一个其他限制符 (*, +, ?, {<em>n</em>}, {<em>n</em>,}, {<em>n</em>,<em>m</em>}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。</td>     </tr>      <tr>       <td>.</td>        <td>匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。</td>     </tr>      <tr>       <td>(<em>pattern</em>)</td>        <td>匹配 <em>pattern</em> 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 <strong>SubMatches</strong> 集合，在JScript 中则使用 <strong>$0</strong>…<strong>$9</strong> 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。</td>     </tr>      <tr>       <td>(?:<em>pattern</em>)</td>        <td>匹配 <em>pattern</em> 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。</td>     </tr>      <tr>       <td>(?=<em>pattern</em>)</td>        <td>正向预查，在任何匹配 <em>pattern</em> 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配 "Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>     </tr>      <tr>       <td>(?!<em>pattern</em>)</td>        <td>负向预查，在任何不匹配 <em>pattern</em> 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>     </tr>      <tr>       <td><em>x</em>|<em>y</em></td>        <td>匹配 <em>x</em> 或 <em>y</em>。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。</td>     </tr>      <tr>       <td>[<em>xyz</em>]</td>        <td>字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。</td>     </tr>      <tr>       <td>[^<em>xyz</em>]</td>        <td>负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'。</td>     </tr>      <tr>       <td>[<em>a-z</em>]</td>        <td>字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。</td>     </tr>      <tr>       <td>[^<em>a-z</em>]</td>        <td>负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。</td>     </tr>      <tr>       <td>\b</td>        <td>匹配一个<strong>单词边界</strong>，也就是指单词和空格间的位置。例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。</td>     </tr>      <tr>       <td>\B</td>        <td>匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。</td>     </tr>      <tr>       <td>\c<em>x</em></td>        <td>匹配由 <em>x </em>指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。<em>x</em> 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。</td>     </tr>      <tr>       <td>\d</td>        <td>匹配一个数字字符。等价于 [0-9]。</td>     </tr>      <tr>       <td>\D</td>        <td>匹配一个非数字字符。等价于 [^0-9]。</td>     </tr>      <tr>       <td>\f</td>        <td>匹配一个换页符。等价于 \x0c 和 \cL。</td>     </tr>      <tr>       <td>\n</td>        <td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>     </tr>      <tr>       <td>\r</td>        <td>匹配一个回车符。等价于 \x0d 和 \cM。</td>     </tr>      <tr>       <td>\s</td>        <td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>     </tr>      <tr>       <td>\S</td>        <td>         <p>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</p>       </td>     </tr>      <tr>       <td>\t</td>        <td>匹配一个制表符。等价于 \x09 和 \cI。</td>     </tr>      <tr>       <td>\v</td>        <td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>     </tr>      <tr>       <td>\w</td>        <td>匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。</td>     </tr>      <tr>       <td>\W</td>        <td>匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。</td>     </tr>      <tr>       <td>\xn</td>        <td>匹配 <em>n</em>，其中 <em>n</em> 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\x41' 匹配 "A"。'\x041' 则等价于 '\x04' &amp; "1"。正则表达式中可以使用 ASCII 编码。</td>     </tr>      <tr>       <td>\<em>num</em></td>        <td>匹配 <em>num</em>，其中 <em>num</em> 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。</td>     </tr>      <tr>       <td>\<em>n</em></td>        <td>标识一个八进制转义值或一个向后引用。如果 \<em>n</em> 之前至少 <em>n</em> 个获取的子表达式，则 <em>n</em> 为向后引用。否则，如果 <em>n</em> 为八进制数字 (0-7)，则 <em>n</em> 为一个八进制转义值。</td>     </tr>      <tr>       <td>\<em>nm</em></td>        <td>标识一个八进制转义值或一个向后引用。如果 \<em>nm</em> 之前至少有 <em>nm</em> 个获得子表达式，则 <em>nm</em> 为向后引用。如果 \<em>nm</em> 之前至少有 <em>n</em> 个获取，则 <em>n</em> 为一个后跟文字 <em>m </em>的向后引用。如果前面的条件都不满足，若 <em>n</em> 和 <em>m</em> 均为八进制数字 (0-7)，则 \<em>nm</em> 将匹配八进制转义值 <em>nm</em>。</td>     </tr>      <tr>       <td>\<em>nm</em>l</td>        <td>如果 <em>n</em> 为八进制数字 (0-3)，且 <em>m</em> 和 <em>l</em> 均为八进制数字 (0-7)，则匹配八进制转义值 <em>nml。</em></td>     </tr>      <tr>       <td><em>/i</em></td>        <td>使正则表达式对大小写不敏感, (?-i)是关闭大小写不敏感          <br>(?i)te(?-i)st应该匹配TEst，但是不能匹配teST或TEST.</td>     </tr>      <tr>       <td><em>/s</em></td>        <td>开启“单行模式”，即点号“.”匹配新行符</td>     </tr>      <tr>       <td><em>/m</em></td>        <td>开启“多行模式”，即“^”和“$”匹配新行符的前面和后面的位置。</td>     </tr>      <tr>       <td><em>^[0-9]*$</em></td>        <td>只能输入数字</td>     </tr>      <tr>       <td><em>^\d{n}$</em></td>        <td>只能输入n位的数字</td>     </tr>      <tr>       <td><em>^\d{n,}$</em></td>        <td>只能输入至少n位的数字</td>     </tr>      <tr>       <td><em>^\d{m,n}$</em></td>        <td>只能输入m~n位的数字</td>     </tr>      <tr>       <td><em>^(0|[1-9][0-9]*)$</em></td>        <td>只能输入零和非零开头的数字</td>     </tr>      <tr>       <td><em>^[0-9]+(.[0-9]{2})?$</em></td>        <td>只能输入有两位小数的正实数</td>     </tr>      <tr>       <td><em>^[0-9]+(.[0-9]{1,3})?$</em></td>        <td>只能输入有1~3位小数的正实数</td>     </tr>      <tr>       <td><em>^\+?[1-9][0-9]*$</em></td>        <td>只能输入非零的正整数</td>     </tr>      <tr>       <td><em>^\-[1-9][]0-9"*$</em></td>        <td>只能输入非零的负整数</td>     </tr>      <tr>       <td><em>^.{3}$</em></td>        <td>只能输入长度为3的字符</td>     </tr>      <tr>       <td><em>^[A-Za-z]+$</em></td>        <td>只能输入由26个英文字母组成的字符串</td>     </tr>      <tr>       <td><em>^[A-Za-z0-9]+$</em></td>        <td>只能输入由数字和26个英文字母组成的字符串</td>     </tr>      <tr>       <td><em>^\w+$</em></td>        <td>只能输入由数字、26个英文字母或者下划线组成的字符串</td>     </tr>      <tr>       <td><em>^[a-zA-Z]\w{5,17}$</em></td>        <td>验证用户密码：以字母开头，长度在6~18之间，只能包含字符、数字和下划线。</td>     </tr>      <tr>       <td><em>[^%&amp;',;=?$\x22]+</em></td>        <td>验证是否含有^%&amp;',;=?$\"等字符</td>     </tr>      <tr>       <td><em>^[\u4e00-\u9fa5]{0,}$</em></td>        <td>只能输入汉字</td>     </tr>      <tr>       <td><em>^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</em></td>        <td>验证Email地址</td>     </tr>      <tr>       <td><em>^</em><a href="http://%28[/"><em>http://([</em></a><em>\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$</em></td>        <td>验证InternetURL</td>     </tr>      <tr>       <td><em>^\d{15}|\d{18}$</em></td>        <td>验证身份证号（15位或18位数字）</td>     </tr>      <tr>       <td><em>^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$</em></td>        <td>验证IP地址</td>     </tr>      <tr>       <td><em>(\w)\1</em></td>        <td>匹配两个两个重叠出现的字符          <br>          <p>例如，"aabbc11asd"， 返回结果为aa bb 11三组match</p>       </td>     </tr>      <tr>       <td><em>&lt;(?&lt;tag&gt;[^\s&gt;]+)[^&gt;]*&gt;.*&lt;/\k&lt;tag&gt;&gt;</em></td>        <td>匹配成对的HTML标签 </td>     </tr>      <tr>       <td><em>(?!)</em></td>        <td>不出现，负声明          <br>下例演示如何取得一个&lt;a&gt;标签对中的全部内容，即使其中包含别的HTML tag。           <br>          <br>          <div>           <div>             <pre><span>string</span> newsContent = <span>@"url:&lt;a href="</span><span>"1.html"</span><span>"&gt;&lt;img src="</span><span>"1.gif"</span><span>"&gt;test&lt;span style="</span><span>"color:red;"</span><span>"&gt;</span></pre>
+
+            <pre>&nbsp;</pre>
+
+            <pre>Regex&lt;/span&gt;&lt;/a&gt;."; </pre>
+
+            <pre>Regex regEnd = <span>new</span> Regex(<span>@"&lt;\s*a[^&gt;]*&gt;([^&lt;]|&lt;(?!/a))*&lt;\s*/a\s*&gt;"</span>,RegexOptions.Multiline); </pre>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody></table></div>
+
+<p>&nbsp;</p>
+
+<p><strong>1. 匹配组</strong></p>
+
+<blockquote>
+  <p><strong>常用的组匹配：(实用)</strong></p>
+
+  <div class="table-wrapper"><table border="1" cellspacing="0" cellpadding="2" width="535"><tbody>
+      <tr>
+        <td>
+          <p><strong><code>(</code></strong><em>exp</em><strong><code>)</code> </strong></p>
+        </td>
+
+        <td>匹配<em>exp</em>并且捕获到一个自动命名的组</td>
+      </tr>
+
+      <tr>
+        <td>
+          <p><strong><code>(?&lt;</code></strong><em>name</em><code><strong>&gt;</strong></code><em>exp</em><strong><code>)</code> </strong></p>
+        </td>
+
+        <td>匹配<em>exp</em>并且捕获到组’name’</td>
+      </tr>
+
+      <tr>
+        <td><strong><code>(?=</code></strong><em>exp</em><strong><code>)</code></strong></td>
+
+        <td><em>exp</em>出现在声明右侧，但<em>exp</em>不作为匹配 
+
+          <br>
+
+          <br>括号中的模式必须出现在声明右侧，但不作为匹配的一部分 ，例如： 
+
+          <br>
+
+          <br>输入： <em>public keywod <strong>str</strong>ing "abc"; 
+
+            <br></em>正则：\b\w+(?=ing\b)，返回“str”， 
+
+          <br>意思为：匹配以ing结束的单词，但ing不作为返回</td>
+      </tr>
+
+      <tr>
+        <td><strong><code>(?&lt;=</code></strong><em>exp</em><strong><code>)</code></strong></td>
+
+        <td><em>exp</em>出现在声明左侧，但<em>exp</em>不作为匹配 
+
+          <br>
+
+          <br>括号中的模式必须出现在声明左侧，但不作为匹配的一部分 ，例如： 
+
+          <br>
+
+          <br>输入： public re<strong>member</strong> string "abc"; 
+
+          <br>正则：(?&lt;=\bre)\w+\b，返回“member”， 
+
+          <br>意思为：匹配以re开头的单词，但re不作为返回</td>
+      </tr>
+
+      <tr>
+        <td>
+          <p><strong><code>(?!</code></strong><em>exp</em><strong><code>) </code></strong></p>
+        </td>
+
+        <td><em>exp</em>不出现在声明右侧，但<em>exp</em>不作为匹配 
+
+          <br>
+
+          <br>括号中的模式必须不出现在声明右侧 ，例如： 
+
+          <br>
+
+          <br>输入： remember <strong>aqa</strong> bqu "abc"; 
+
+          <br>正则：\b\w*q(?!u)\w*\b，返回“aqa”， 
+
+          <br>意思为：匹配带q后面不是跟随u的单词</td>
+      </tr>
+
+      <tr>
+        <td>
+          <p><strong><code>(?&lt;!</code></strong><em>exp</em><strong><code>)</code> </strong></p>
+        </td>
+
+        <td><em>exp</em>不出现在声明左侧，但<em>exp</em>不作为匹配 
+
+          <br></td>
+      </tr>
+    </tbody></table></div>
+
+  <p>&nbsp;</p>
+
+  <p><strong>输入</strong>：public string keywod = "abc"; string value = "test";</p>
+
+  <p><strong>目的</strong>：匹配 关键字=""，例如获得关键字keyword，value；获得等于的值abc和test</p>
+
+  <p><strong>表达式</strong>：string (?&lt;x&gt;[^=]*?) *= *(?&lt;y&gt;[^;]*?);</p>
+
+  <p><strong>代码</strong>：</p>
+
+  <div>
+    <div>
+      <pre><span>private</span> <span>void</span> ParseKeywords(<span>string</span> input)</pre>
+
+      <pre>{</pre>
+
+      <pre> System.Text.RegularExpressions.MatchCollection mc = </pre>
+
+      <pre> System.Text.RegularExpressions.Regex.Matches(input, <span>@"string (?&lt;x&gt;[^=]*?) *= *(?&lt;y&gt;[^;]*?);"</span>);</pre>
+
+      <pre>&nbsp;</pre>
+
+      <pre> <span>if</span> (mc != <span>null</span> &amp;&amp; mc.Count &gt; 0)</pre>
+
+      <pre> {</pre>
+
+      <pre> <span>foreach</span> (System.Text.RegularExpressions.Match m <span>in</span> mc)</pre>
+
+      <pre> {</pre>
+
+      <pre> <span>string</span> keyword = m.Groups[<span>"x"</span>].Value;</pre>
+
+      <pre> <span>string</span> <span>value</span> = m.Groups[<span>"y"</span>].Value;</pre>
+
+      <pre> }</pre>
+
+      <pre> }</pre>
+
+      <pre>}</pre>
+    </div>
+  </div>
+</blockquote>
+
+<p><strong>2. 匹配并替换</strong></p>
+
+<blockquote>
+  <p><strong>输入</strong>：public &lt;%=classname%&gt;Extension : IExt</p>
+
+  <p><strong>目的</strong>：匹配 &lt;%= %&gt;中间的classname并替换</p>
+
+  <p><strong>表达式</strong>：&lt;%=.*%&gt;</p>
+
+  <p><strong>代码</strong>：</p>
+
+  <div>
+    <div>
+      <pre><span>private</span> string Replace(<span>string</span> input)</pre>
+
+      <pre>{</pre>
+
+      <pre> <span>return</span> Regex.Replace(input, <span>@"&lt;%=.*%&gt;"</span>, <span>new</span> MatchEvaluator(RefineCodeTag), RegexOptions.Singleline);</pre>
+
+      <pre>}</pre>
+
+      <pre>&nbsp;</pre>
+
+      <pre><span>string</span> RefineCodeTag(Match m)</pre>
+
+      <pre>{</pre>
+
+      <pre> <span>string</span> x = m.ToString();</pre>
+
+      <pre>&nbsp;</pre>
+
+      <pre> x = Regex.Replace(x, <span>"&lt;%="</span>, <span>""</span>);</pre>
+
+      <pre> x = Regex.Replace(x, <span>"%&gt;"</span>, <span>""</span>);</pre>
+
+      <pre>&nbsp;</pre>
+
+      <pre> <span>return</span> x.Trim() + <span>","</span>;</pre>
+
+      <pre>}</pre>
+    </div>
+  </div>
+
+  <p>正则表达式选项RegexOptions:</p>
+
+  <div class="table-wrapper"><table border="1" cellspacing="0" cellpadding="2" width="571"><tbody>
+      <tr>
+        <td>
+          <p>ExplicitCapture</p>
+        </td>
+
+        <td>n</td>
+
+        <td>
+          <p>只有定义了命名或编号的组才捕获</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>IgnoreCase</td>
+
+        <td>i</td>
+
+        <td>不区分大小写</td>
+      </tr>
+
+      <tr>
+        <td>IgnorePatternWhitespace</td>
+
+        <td>x</td>
+
+        <td>消除模式中的非转义空白并启用由 # 标记的注释。</td>
+      </tr>
+
+      <tr>
+        <td>MultiLine</td>
+
+        <td>m</td>
+
+        <td>
+          <p>多行模式，其原理是修改了^和$的含义</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>SingleLine</td>
+
+        <td>s</td>
+
+        <td>
+          <p>单行模式，和MultiLine相对应</p>
+        </td>
+      </tr>
+    </tbody></table></div>
+
+  <p>正则表达式替换的其他功能：</p>
+
+  <div class="table-wrapper"><table border="1" cellspacing="0" cellpadding="2" width="571"><tbody>
+      <tr>
+        <td><em>$number</em></td>
+
+        <td>把匹配的第number组替换成替换表达式 
+          <br>
+
+          <br>
+
+          <p>这段代码返回的是 “01 012 03 05” </p>
+
+          <p>就是说，对组一的每个匹配结果都用"0$1"这个表达式来替换，"0$1"中"$1"由组1匹配的结果代入</p>
+
+          <br>
+
+          <div>
+            <div>
+              <pre><span>public</span> <span>static</span> <span>void</span> Main()</pre>
+
+              <pre>{ </pre>
+
+              <pre> <span>string</span> s = <span>"1 12 3 5"</span>;</pre>
+
+              <pre> s = Regex.Replace(s,<span>@"(\d+)(?#这个是注释)"</span>,<span>"0$1"</span>,RegexOptions.Compiled|RegexOptions.IgnoreCase);</pre>
+
+              <pre> Console.WriteLine(s);</pre>
+
+              <pre> Console.ReadLine();</pre>
+
+              <pre> }</pre>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <p><em>${name}</em></p>
+        </td>
+
+        <td>
+          <p>把匹配的组名为"name"的组替换成表达式， </p>
+
+          <p>上例的Regex expression改成@"(?&lt;name&gt;\d+)(?#这个是注释)"后面的替换式改为"0${name}"结果是一样的</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <p><em>$$</em></p>
+        </td>
+
+        <td>
+          <p>做$的转义符，如上例表达式改成@"(?&lt;name&gt;\d+)(?#这个是注释)"和"$$${name}"，则结果为"$1 $12 $3 $5"</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td><em>$&amp;</em></td>
+
+        <td>替换整个匹配</td>
+      </tr>
+
+      <tr>
+        <td><em>$`</em></td>
+
+        <td>替换匹配前的字符</td>
+      </tr>
+
+      <tr>
+        <td><em>$'</em></td>
+
+        <td>替换匹配后的字符</td>
+      </tr>
+
+      <tr>
+        <td><em>$+</em></td>
+
+        <td>替换最后匹配的组</td>
+      </tr>
+
+      <tr>
+        <td><em>$_</em></td>
+
+        <td>替换整个字符串</td>
+      </tr>
+    </tbody></table></div>
+
+  <p>&nbsp;</p>
+</blockquote>
+
+<p><strong>3. 匹配URL中文件名</strong></p>
+
+<blockquote>
+  <p><strong>输入</strong>：<a href="http://www.9499.net/page1.htm">http://www.9499.net/page1.htm</a></p>
+
+  <p><strong>目的</strong>：从URL地址中提取文件名</p>
+
+  <p><strong>表达式</strong>：s=s.replace(/(.*\/){0,}([^\.]+).*/ig,"$2") ;</p>
+
+  <p><strong>代码</strong>：</p>
+
+  <p>string s = "<a href="http://www.9499.net/page1.htm">http://www.9499.net/page1.htm</a>"; 
+
+    <br>s = s.replace(/(.*\/){0,}([^\.]+).*/ig, "$2") ;&nbsp; </p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>转自：<a href="http://www.cnblogs.com/Mainz/archive/2009/03/14/1411359.html">http://www.cnblogs.com/Mainz/archive/2009/03/14/1411359.html</a></p>
+</div>
+<div id="MySignature">
+    <p><strong>文档信息</strong></p>
+<p>作者：<a href="http://www.cnblogs.com/afarmer">一个农夫</a> ( <a href="http://www.cnblogs.com/afarmer">www.cnblogs.com/afarmer</a> ) </p>
+<p>欢迎转载，请保留文档信息。</p>
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/afarmer/category/315450.html" target="_blank">正则表达式</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2158860,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;945ef1af-c3c2-de11-ba8f-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/afarmer/" target="_blank"><img src="./博客园_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/afarmer/">一个农夫</a><br>
+            <a href="https://home.cnblogs.com/u/afarmer/followees/">关注 - 14</a><br>
+            <a href="https://home.cnblogs.com/u/afarmer/followers/">粉丝 - 149</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;945ef1af-c3c2-de11-ba8f-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(2158860,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">22</span>
+    </div>
+    <div class="buryit" onclick="votePost(2158860,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/afarmer/archive/2011/08/06/2129126.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/afarmer/archive/2011/08/06/2129126.html" title="发布于 2011-08-06 00:28">Windows下安装Redmine</a>
+    <br>
+    <a href="https://www.cnblogs.com/afarmer/archive/2011/11/15/2250438.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/afarmer/archive/2011/11/15/2250438.html" title="发布于 2011-11-15 23:11">正则表达式30分钟入门教程</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2011-08-29 21:10</span>&nbsp;
+<a href="https://www.cnblogs.com/afarmer/">一个农夫</a>&nbsp;
+阅读(<span id="post_view_count">108865</span>)&nbsp;
+评论(<span id="post_comment_count">8</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2158860" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2158860);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: &#39;&#39;, targetType: &#39;blogPost&#39;, targetId: &#39;2158860&#39;, targetLink: &#39;https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html&#39;, title: &#39;正则表达式中各种字符的含义&#39; })">举报</a></div>
+        </div>
+        
+<script src="./博客园_files/highlight.min.js.下载" async="" onload="markdown_highlight()"></script>
+<script>
+    var allowComments = true, cb_blogId = 62291, cb_blogApp = 'afarmer', cb_blogUserGuid = '945ef1af-c3c2-de11-ba8f-001cf0cd104b';
+    var cb_entryId = 2158860, cb_entryCreatedDate = '2011-08-29 21:10', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    登录后才能查看或发表评论，立即 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return account.login(&#39;!comments&#39;);">登录</a> 或者
+    <a href="https://www.cnblogs.com/">逛逛</a> 博客园首页
+</div>
+</div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="https://cloud.baidu.com/campaign/bccdiscount/index.html?track=cp:bokeyuan|pf:pc|pp:H-bokeyuan-21bccsanqi-neiyewenzilian|pu:21bccsanqi-neiyewenzilian|ci:21bcc|kw:10370321" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-百度智能云&#39;)">【推荐】百度智能云超值优惠：新用户首购云服务器1核1G低至69元/年</a><br><a href="http://www.uccpsoft.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】跨平台组态\工控\仿真\CAD 50万行C++源码全开放免费下载！</a><br><a href="https://www.aliyun.com/minisite/goods?taskCode=yds2021-09zy&amp;recordId=883117&amp;userCode=swh7dvlt" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云-cps&#39;)">【推荐】阿里云云大使特惠：新用户购ECS服务器1核2G最低价87元/年</a><br><a href="https://brands.cnblogs.com/huawei" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-华为专区&#39;)">【推荐】和开发者在一起：华为开发者社区，入驻博客园科技品牌专区</a><br><a href="https://www.cnblogs.com/cmt/p/15147135.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-众安保险&#39;)">【推广】园子与爱卡汽车爱宝险合作，随手就可以买一份的百万医疗保险</a><br></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+             <a onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;Pangle-C1&#39;)" target="_blank" rel="nofollow" href="https://c.gridsumdissector.com/r/?gid=gad_545_ph4hkwzt&amp;ck=32&amp;adk=442&amp;autorefresh=__AUTOREFRESH__">
+                <img style="width: 300px; height: 250px;" src="./博客园_files/35695-20210817131346802-930113090.jpg" alt="" onload="gscmdImpress()">
+             </a>
+    </div>
+    <div id="under_post_card1"><div class="under-post-card">
+<b>编辑推荐：</b>
+<br>
+
+· <a href="https://www.cnblogs.com/zhujiqian/p/15312435.html" target="_blank"> 通过 Wireshark 抓包分析谈谈 DNS 域名解析的那些事儿</a>
+    <br>
+· <a href="https://www.cnblogs.com/eventhorizon/p/15316955.html" target="_blank">概述 .NET 6 ThreadPool 实现</a>
+    <br>
+· <a href="https://www.cnblogs.com/xuanyuan/p/15266447.html" target="_blank">现代操作系统管理内存，到底是分段还是分页？</a>
+    <br>
+· <a href="https://www.cnblogs.com/snailZz/p/15287774.html" target="_blank">源码解析 Grpc 拦截器 (C# 版本)</a>
+    <br>
+· <a href="https://www.cnblogs.com/xiaoxiaotank/p/15273093.html" target="_blank">理解ASP.NET Core - Host</a>
+    <br>
+</div></div>
+    <div id="under_post_card2"><div class="itnews under-post-card">
+    <b>最新新闻</b>：
+    <br>
+ ·          <a href="https://news.cnblogs.com/n/702752/" target="_blank">发布两天后 iOS 15的采用率不如同期的iOS 14（2021-09-23 12:38）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/702751/" target="_blank">新浪新闻内部信曝光，CEO王巍：让AI更有价值观是长期信仰（2021-09-23 12:30）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/702750/" target="_blank">消息称英特尔CEO拟与三星等公司代表出席白宫会议 讨论芯片短缺问题（2021-09-23 12:22）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/702749/" target="_blank">51talk被通报批评整改不到位（2021-09-23 12:17）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/702748/" target="_blank">广州地铁联合腾讯发布穗腾OS2.0（2021-09-23 12:11）</a>
+        <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    <div style="border:1px dashed #ccc;color:#000;">欢迎转载，请保留链接地址等文档信息。<img src="./博客园_files/o_guoplus126.png"></div>
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/afarmer/">
+            一个农夫
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/afarmer/" title="入园时间：2009-10-27">
+            11年10个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/afarmer/followers/">
+            149
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/afarmer/followees/">
+            14
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;945ef1af-c3c2-de11-ba8f-001cf0cd104b&#39;)">+加关注</a></div>
+        <script>getFollowStatus('945ef1af-c3c2-de11-ba8f-001cf0cd104b');</script>
+    </div>
+</div></div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"><!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+
+
+<!-- 最新随笔 -->
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+    <h3 class="catListTitle">我的标签</h3>
+    <ul>
+                <li>
+            <a href="https://www.cnblogs.com/afarmer/tag/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式<span class="tag-count">(1)</span></a>
+        </li>
+    
+
+    </ul>
+</div>
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+
+    <div class="catListPostCategory">
+        <h3 class="catListTitle">
+            
+随笔分类
+
+
+
+        </h3>
+        <ul>
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314444.html" rel="" target="">
+    C/CPP(7)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314439.html" rel="" target="">
+    java(8)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/297181.html" rel="" target="">
+    mfc(30)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/216066.html" rel="" target="">
+    opengl(11)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/343234.html" rel="" target="">
+    oracle(2)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314441.html" rel="" target="">
+    php(1)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/423779.html" rel="" target="">
+    产品设计(2)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/526894.html" rel="" target="">
+    待定(1)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/297196.html" rel="" target="">
+    技术文档(5)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314438.html" rel="" target="">
+    前端(8)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/426826.html" rel="" target="">
+    软件使用(6)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/655551.html" rel="" target="">
+    设计模式(1)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314436.html" rel="" target="">
+    数据结构与算法(2)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314434.html" rel="" target="">
+    系统开发与架构(9)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/314433.html" rel="" target="">
+    项目开发与管理(3)
+</a>
+
+                    
+                </li>
+                                            <li data-category-list-item-visible="false" style="display: none">
+                    
+<a href="https://www.cnblogs.com/afarmer/category/315450.html" rel="" target="">
+    正则表达式(4)
+</a>
+
+                    
+                </li>
+                                        <li><a href="javascript:void(0)" onclick="sideColumnManager.loadMore(this)">更多</a></li>
+        </ul>
+    </div></div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap" class="RecentComment">
+    <h3 class="catListTitle">最新评论</h3>
+    <div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/afarmer/archive/2011/05/01/2033715.html">1. Re:C/C++中产生随机数(rand,srand用法)</a></li>
+                    <li class="recent_comment_body"><p>每组生成10个随机数，生成1000组，怎么使1000组几乎不相同，我用循环实现，好多组都是相同的</p>
+</li>
+                    <li class="recent_comment_author">--西班牙饼干</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">2. Re:正则表达式中各种字符的含义</a></li>
+                    <li class="recent_comment_body"><p>作者幸苦了，学到了</p>
+</li>
+                    <li class="recent_comment_author">--赵四毛</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">3. Re:正则表达式中各种字符的含义</a></li>
+                    <li class="recent_comment_body">支持一下</li>
+                    <li class="recent_comment_author">--茫茫江浸月</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">4. Re:正则表达式中各种字符的含义</a></li>
+                    <li class="recent_comment_body">学习了，谢谢</li>
+                    <li class="recent_comment_author">--茫茫江浸月</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">5. Re:正则表达式中各种字符的含义</a></li>
+                    <li class="recent_comment_body">相当有用。推荐！<br>15个常用正则表达式：<a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html" target="_blank"></a></li>
+                    <li class="recent_comment_author">--bug人</li>
+        </ul>
+    </div>
+</div></div>
+
+
+<!-- 阅读排行榜 -->
+
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+    <h3 class="catListTitle">评论排行榜</h3>
+    <div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/afarmer/archive/2012/03/30/2426050.html">
+                            1. arbor.js库(80)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/afarmer/archive/2011/08/06/2129126.html">
+                            2. Windows下安装Redmine(11)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/afarmer/archive/2011/08/29/2158860.html">
+                            3. 正则表达式中各种字符的含义(8)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/afarmer/archive/2011/05/05/2038201.html">
+                            4. C语言typedef的用法(5)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/afarmer/archive/2011/05/05/2037543.html">
+                            5. C语言之精华总结(2)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div></div>
+
+<!-- 推荐排行榜 -->
+</div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright © 2021 一个农夫
+<br><span id="poweredby">Powered by .NET 6 on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ddbee7c7a95ba54d203d975f83ae0703";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8NACB8VE9qlHm6Ujjqxvg5A_cCzf_uB_HshbNgzOGNSumcyF5zDHiWGyTM0apk2bjMdYs6xB1iybSa_l2qUcMEHGAvuhjGULpJDkczpzo4UzeElqKWpRWCx3cfaK2MnWiDPQ0t02v3vNp_bqRx_DRWM">
+
+
+</body></html>
