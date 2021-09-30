@@ -1,4 +1,5 @@
 '''
+方案1----------------------------
 http请求练习, 能响应多次请求,
 主要功能 ：
 【1】 接收客户端（浏览器）请求
@@ -93,7 +94,7 @@ class WebServer:
                         r.close()
 
     def __handle(self,connfd):
-        data = connfd.recv(1024 * 10).decode()
+        data = connfd.recv(1024 * 1024).decode()
         # print(data)
         pattern = "[A-Z]+\s+(?P<info>/\S*)"
         result = re.match(pattern,data) #match对象或None
